@@ -23,12 +23,12 @@
 
   </div>
   <div class="list list-inset">
-    <a class="list-item button button-block button-calm" ng-click="loadMore()" ng-show="hasMore">加载更多</a>
-    <!--<ion-infinite-scroll-->
-      <!--immediate-check="false"-->
-      <!--ng-if="hasMore"-->
-      <!--on-infinite="loadMore()" >-->
-    <!--</ion-infinite-scroll>-->
+    <!--<a class="list-item button button-block button-calm" ng-click="loadMore()" ng-show="hasMore">加载更多</a>-->
+    <ion-infinite-scroll
+      immediate-check="false"
+      ng-if="hasMore"
+      on-infinite="show()" >
+    </ion-infinite-scroll>
     <a class="list-item button button-block button-assertive" ng-hide="hasMore">没有more的数据了 </a>
   </div>
 
