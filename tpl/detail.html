@@ -11,7 +11,7 @@
     <div class="item">
       <h3>{{dish.name}}</h3>
       <img ng-src="img/{{dish.img_lg}}" class="img-responsive" alt=""/>
-      <p><b>主要材料：</b>{{dish_material}}</p>
+      <p><b>主要材料：</b>{{dish.material}}</p>
       <h3>
        {{dish.detail}}
       </h3>
@@ -22,7 +22,7 @@
     </div>
 
       <div class="item item-divider text-right">
-       <button ui-sref="order"  class="button button-small button-balanced">我要下单</button>
+       <button  ui-sref="order({did:dish.did})" class="button button-small button-balanced">我要下单</button>
        <button ui-sref="main"   class="button button-small button-balanced">容我想一会</button>
       </div>
   </div>

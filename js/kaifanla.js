@@ -10,16 +10,14 @@ app.config(function($stateProvider,$urlRouterProvider){
 
     .state('main',{url:'/main',templateUrl:'tpl/main.html',controller:'mainCtrl'})
 
-    .state('myOrder',{url:'/myOrder',templateUrl:'tpl/myOrder.html'})
+    .state('myOrder',{url:'/myOrder',templateUrl:'tpl/myOrder.html',controller:'myOrderCtrl'})
 
-    .state('order',{url:'/order',templateUrl:'tpl/order.html'})
+    .state('order',{url:'/order/:did',templateUrl:'tpl/order.html',controller:'orderCtrl'})
 
-    //.state('detail',{url:'/myDetail',templateUrl:'tpl/detail.html'})
-
-    .state('detail',{url:'/myDetail/:id',templateUrl:'tpl/detail.html',controller:'detailCtrl'})
+    .state('detail',{url:'/myDetail/:did',templateUrl:'tpl/detail.html',controller:'detailCtrl'})
 
 
-    .state('start', {url:'/start',templateUrl:"tpl/start.html"})
+    .state('start', {url:'/start',templateUrl:"tpl/start.html", controller:"startCtrl"})
 
   $urlRouterProvider.otherwise('start');//异常情况的处理
 
@@ -30,16 +28,16 @@ app.config(function($stateProvider,$urlRouterProvider){
 app.controller('parentCtrl',['$scope','$state',function($scope,$state){
   $scope.jump=function(arg,data){
     $state.go(arg,data);
-
-
   }
 }]);
 
 app.controller('detailCtrl',['$scope','$http','$stateParams',function($scope,$http,$stateParams){
-   //console.log($stateParams.id);
-  $http.get('data/dish_getbyid.php?id='+$stateParams.id).success(function(data){
-    $scope.dish=data[0];
-    console.log($scope.dish);
+debugger;
+  console.log($stateParams.did);
+  $http.
+    get('data/dish_getbyid.php?id=' + $stateParams.did)
+    .success(function(data){$scope.dish=data[0];
+  //  console.log($scope.dish);
   });
 }]);
 
@@ -92,17 +90,43 @@ app.controller('mainCtrl',['$scope','$http',function($scope,$http){
 
 
 
-app.controller('myOrderCtrl',['$scope','$state',function($scope,$state){
-
+app.controller('myOrderCtrl',['$scope','$http',function($scope,$http){
+   $http
+     .get('data/order_getbyphone.php?phone='+sessionStorage.getItem('phone')).success(function(data){
+     console.log(data);
+     $scope.orderList=data;
+   });
 
 }]);
 
-app.controller('orderCtrl',['$scope','$state',function($scope,$state){
+app.controller('orderCtrl',['$scope','$http','$stateParams',
+  '$httpParamSerializerJQLike',function($scope,$http,$stateParams,$httpParamSerializerJQLike){
 
+    $scope.order={did : $stateParams.did};
 
+  $scope.submitOrder=function(){
+
+    var  orderData=$httpParamSerializerJQLike($scope.order);
+  console.log($stateParams.id);
+  console.log(orderData);
+
+    $http.get("data/order_add.php?"+orderData).success(function(data){
+
+      console.log(data);
+
+      if( data[0].msg=='succ'){
+
+        $scope.succMsg="订单已经下达";
+        sessionStorage['phone']=$scope.order.phone;
+      }
+
+      else{
+        $scope.errMsg="请完善信息....";
+      }
+    });
+  }
 }]);
 
-app.controller('startCtrl',['$scope','$state',function($scope,$state){
-
+app.controller('startCtrl',['$scope','$http',function($scope,$http){
 
 }]);

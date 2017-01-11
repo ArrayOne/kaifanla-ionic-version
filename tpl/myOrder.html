@@ -14,24 +14,17 @@
       </div>
     </div>
     <div class="item">
-      <div class="row">
-        <div class="col col-20 col-center">1</div>
-        <div class="col col-30"><img src="img/p0281.jpg" alt="" class="img-responsive" ui-sref="detail"/></div>
-        <div class="col col-30 col-center">2016-12-4</div>
-        <div class="col col-20 col-center">Tom</div>
+      <div class="row" ng-repeat="tmp in orderList">
+        <div class="col col-20 col-center">{{tmp.oid}}</div>
+        <div class="col col-30">
+          <a href="#/myDetail/{{tmp.did}}">
+           <img ng-src="img/{{tmp.img_sm}}" alt="" class="img-responsive" />
+          </a>
+        </div>
+        <div class="col col-30 col-center">{{tmp.order_time|date:'yyyy-MM-dd hh:mm'}}</div>
+        <div class="col col-20 col-center">{{tmp.user_name}}</div>
       </div>
-      <div class="row">
-        <div class="col col-20 col-center">1</div>
-        <div class="col col-30"><img src="img/p0281.jpg" class="img-responsive" alt="" ui-sref="detail"/></div>
-        <div class="col col-30 col-center">2016-12-4</div>
-        <div class="col col-20 col-center">Tom</div>
-      </div>
-      <div class="row">
-        <div class="col col-20 col-center">1</div>
-        <div class="col col-30"><img src="img/p0281.jpg" class="img-responsive" alt="" ui-sref="detail"/></div>
-        <div class="col col-30 col-center">2016-12-4</div>
-        <div class="col col-20 col-center">Tom</div>
-      </div>
+
 
 
     </div>
