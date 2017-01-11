@@ -1,0 +1,41 @@
+<div ng-include="'tpl/include/header.html'"></div>
+
+<ion-content class="has-header has-footer">
+  <div class="card">
+    <div class="item item-divider">
+      <label for="">联系人</label>
+    </div>
+    <div class="item-input">
+      <input type="text" placeholder="输入用户名"/>
+    </div>
+
+    <div class="item item-divider">
+      <label for="">性别</label>
+    </div>
+    <div class="item">
+      <input type="radio"/>先生
+      <input type="radio"/> 女士
+    </div>
+
+    <div class="item item-divider">
+      <label for="">联系电话</label>
+    </div>
+    <div class="item">
+        <input type="text" placeholder="请输入电话号码"/>
+    </div>
+    
+    <div class="item item-divider">
+      <label for="">送货地址</label>
+    </div>
+    <div class="item item-input">
+      <textarea name="" id="" cols="30" rows="4"></textarea>
+    </div>
+  </div>
+  <div class="list list-inset">
+    <button ui-sref="myOrder" class="button button-balanced button-block">下单</button>
+  </div>
+
+
+</ion-content>
+
+<div ng-include="'tpl/include/footer.html'"></div>
